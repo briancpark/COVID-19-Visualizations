@@ -3,6 +3,9 @@ Visualizations of the novel coronavirus using data science and machine learning 
 
 _Stay Strong, Stay Home, and Save Lives_
 
+## Dependencies
+This project uses Pandas, NumPy, MatPlotLin, GeoPandas, and Descartes. All the code needed to run is in `COVID19 Visualizations.ipynb`. Please make sure you have installed the all the Python libraries before you run the code.
+
 # Core Functions
 
 ## `country(country_name, data)`
