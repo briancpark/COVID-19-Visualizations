@@ -14,11 +14,11 @@ Displays the graphs of a country associated with the type of data (confirmed, de
 ## `country_legend(country_name)`
 Displays the graphs of all the types of data for a given country
 
-## `customCountries(list_countries)`
-Displays the all graph for a list of given countries. All on top of each other for comparison of statistics.
-
 ## `country_active_cases(country_name)`
 Displays the graph of active cases of COVID-19 for a given country. Calculated by `active = confirmed - deaths - recovered`
+
+## `compare_countries(list_countries)`
+Displays the all graph for a list of given countries. All on top of each other for comparison of statistics.
 
 # Update Functions
 
