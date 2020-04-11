@@ -45,7 +45,6 @@ Updates/overwrites the worldwide COVID-19 active cases. Saved in the main direct
 ![Global Active Statistics](COVID19_worldwide_active.png)
 
 # Geo Functions
-
 These functions utilize the GeoPandas library to visualize COVID-19 cases on the map.
 
 ## `compile_timelapse()`
