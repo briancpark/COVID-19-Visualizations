@@ -50,14 +50,14 @@ These functions utilize the GeoPandas library to visualize COVID-19 cases on the
 ## `compile_timelapse()`
 Uses `ffmpeg` to compile into video and gif format.
 
-# Confirmed COVID-19 Cases Worldwide
+## Confirmed COVID-19 Cases Worldwide
 
 ![COVID-19 Confirmed on Map](geo/geo_confirmed/confirmed_timelapse.gif)
 
-# Deaths from COVID-19 Worldwide
+## Deaths from COVID-19 Worldwide
 
 ![COVID-19 Deaths on Map](geo/geo_deaths/deaths_timelapse.gif)
 
-# Recovered COVID-19 Cases Worldwide
+## Recovered COVID-19 Cases Worldwide
 
 ![COVID-19 Recovered on Map](geo/geo_recovered/recovered_timelapse.gif)
