@@ -22,17 +22,35 @@ Displays the graph of active cases of COVID-19 for a given country. Calculated b
 
 # Update Functions
 
-## `updateAllCountryGraphs()`
-Updates/overwrites all the graphs by country and data type (confirmed, deaths, recovered) in the `graphs_by_countries/` directory.
+## `update_all_cases_country_individual()`
+Updates/overwrites all the graphs by country and data type (confirmed, deaths, recovered) in the `cases_country_individual/` directory.
 
-## `updateAllCountryGraphsLegend()`
-Updates/overwrites all the graphs by country and all data types in the `graphs_by_countries_legend/` directory
+## `update_all_cases_country()`
+Updates/overwrites all the graphs by country and all data types in the `cases_country/` directory
 
-## `updateAllCountryActiveCases()`
-Updates/overwrites all the graphs of active cases by country in the `active_cases/` directory
+## `update_all_cases_country_active()`
+Updates/overwrites all the graphs of active cases by country in the `cases_country_active/` directory
 
 
 # Global Statistics
 
+## `worldwide_cases()`
+Updates/overwrites the worldwide COVID-19 cases. Saved in the main directory as `COVID19_worldwide.png`
+
 ![Global Statistics](COVID19_worldwide.png)
-![Global Statistics](COVID19_worldwideACTIVE.png)
+
+## `worldwide_active()`
+Updates/overwrites the worldwide COVID-19 active cases. Saved in the main directory as `COVID19_worldwide_active.png`
+
+![Global Active Statistics](COVID19_worldwide_active.png)
+
+# Geo Functions
+
+These functions utilize the GeoPandas library to visualize COVID-19 cases on the map.
+
+## `compile_timelapse()`
+Uses `ffmpeg` to compile into video and gif format.
+
+![COVID-19 Confirmed on Map](geo/geo_confirmed/confirmed_timelapse.gif)
+![COVID-19 Deaths on Map](geo/geo_deaths/deaths_timelapse.gif)
+![COVID-19 Recovered on Map](geo/geo_recovered/recovered_timelapse.gif)
