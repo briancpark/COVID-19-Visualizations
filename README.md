@@ -1,6 +1,8 @@
 # COVID-19-Visualizations
 Visualizations of the novel coronavirus using data science and machine learning techniques. Please feel free to contribute by sending issues or pull requests. I will do my best effort to update this daily. There is a lot of reading and writing of data involved, so the notebook tends to take around 10 minutes to completely run.
 
+**If your intentions are to use this for a school project or personal project, please fork this repository and email [briancpark@berkeley.edu](mailto:briancpark@berkeley.edu). I am interested in what you are willing to create or have created with my code**
+
 _Stay Strong, Stay Home, and Save Lives_
 
 ## Dependencies
