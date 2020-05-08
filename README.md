@@ -71,4 +71,5 @@ I used the dataset provided by the [NYTimes](https://github.com/nytimes/covid-19
 ![](geo/geo_us/us_cases_timelapse.gif)
 
 *Need to fix bugs related to gif compression*
-*A more cleaner `.mp4` video version is [here](geo/geo_us/us_cases_timelapse.gif)*
+
+*A more cleaner `.mp4` video version is downloadable [here](geo/geo_us/us_cases_timelapse.mp4)*
