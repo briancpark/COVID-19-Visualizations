@@ -5,6 +5,8 @@ Visualizations of the novel coronavirus using data science and machine learning 
 
 _Stay Strong, Stay Home, and Save Lives_
 
+![COVID-19 Confirmed](timelapses/us_confirmed_timelapse.gif)
+
 ## Dependencies
 This project uses Pandas, NumPy, MatPlotLib, GeoPandas, and Descartes, plotly, and Selenium. All the code needed to run is in [`COVID19 Visualizations.ipynb`](https://github.com/briancpark/COVID-19-Visualizations/blob/master/COVID19%20Visualizations.ipynb). Please make sure you have installed the all the Python libraries before you run the code. Also make sure to install `ffmpeg` if you want to compile graphics into video.
 
