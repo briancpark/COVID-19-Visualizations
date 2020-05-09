@@ -6,3 +6,7 @@
 
 .git
 .github
+
+# Ignore the databases
+jhucsse
+nytimes
