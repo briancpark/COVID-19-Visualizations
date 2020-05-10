@@ -11,7 +11,7 @@ _Stay Strong, Stay Home, and Save Lives_
 This project uses Pandas, NumPy, MatPlotLib, GeoPandas, and Descartes, plotly, and Selenium. All the code needed to run is in [`COVID19 Visualizations.ipynb`](https://github.com/briancpark/COVID-19-Visualizations/blob/master/COVID19%20Visualizations.ipynb). Please make sure you have installed the all the Python libraries before you run the code. Also make sure to install `ffmpeg` if you want to compile graphics into video.
 
 ## Databases
-[NYTimes](https://github.com/nytimes/covid-19-data) database was used for United States of America data and [JHU CSSE](https://github.com/CSSEGISandData/COVID-19) database was used for international data. Repository is updated bidaily as both databases update around 12 hours apart.
+[NYTimes](https://github.com/nytimes/covid-19-data) database was used for United States of America data and [JHU CSSE](https://github.com/CSSEGISandData/COVID-19) database was used for international data. Repository is updated bidaily as both databases update around 12 hours apart. Notebook is conveniently coded with UNIX commands so that all it takes to update the visualizations is a simple restart and rerun of the kernel.
 
 # Core Functions
 
@@ -57,27 +57,84 @@ These functions utilize the GeoPandas library to visualize COVID-19 cases on the
 ## `compile_timelapse()`
 Uses `ffmpeg` to compile into video and gif format.
 
-# Timelapses
-timelapses/us_confirmed_timelapse.gif
-## Confirmed COVID-19 Cases Worldwide
+# Visualizations
+
+## Timelapses
+
+### Confirmed COVID-19 Cases Worldwide
 ![COVID-19 Confirmed on Map](timelapses/global_confirmed_timelapse.gif)
 
-## Deaths from COVID-19 Worldwide
+### Deaths from COVID-19 Worldwide
 ![COVID-19 Deaths on Map](timelapses/global_deaths_timelapse.gif)
 
-## Recovered COVID-19 Cases Worldwide
+### Recovered COVID-19 Cases Worldwide
 ![COVID-19 Recovered on Map](timelapses/global_recovered_timelapse.gif)
 
-## Confirmed COVID-19 Cases by County in United States
+### Confirmed COVID-19 Cases by County in United States
 ![COVID-19 Confirmed](timelapses/us_confirmed_timelapse.gif)
 
-## COVID-19 Deaths by County in United States
+### COVID-19 Deaths by County in United States
 ![COVID-19 Deaths](timelapses/us_deaths_timelapse.gif)
+
+## Graphs
+
+### COVID-19 Worldwide Cases
+Cases are still rising alarmingly high
+
+![Global Statistics](COVID19_worldwide.png)
+
+### COVID-19 Active Cases Worldwide
+The amount of active cases are slightly starting to flatten.
+
+![Global Active Statistics](COVID19_worldwide_active.png)
+
+### Where It All Began (China)
+China's effective lockdown measures have resulted in a good recovery. China has slowly started going back to normal life, while still taking precautions of a second wave.
+
+![china](cases_country/China_all.png)
+![china](cases_country_active/China_active_cases.png)
+
+### South Korea's Quick Response with Contact Tracing and Extensive Testing
+South Korea responded quickly and was able contain the virus under 10,000 active cases.
+
+![korea](cases_country/Korea,&#32;South_all.png)
+![korea](cases_country_active/Korea,&#32;South_active_cases.png)
+
+### The Last of US
+Level of disorganized and opposing views of public health has caused economies to shut down and not take the virus to serious measures.
+
+![us](cases_country/US_all.png)
+![us](cases_country_active/US_active_cases.png)
+
+### The Coronavirus Wave
+The novel coronavirus has spread westward and the US will probably be the latest to recover fully based on the data and statistics. Eastern Asia also have to take serious precautions for a second wave, which could lead to another "coronavirus wave" westwards.
+
+![COVID-19 Confirmed on Map](timelapses/global_confirmed_timelapse.gif)
+
+### How Bad is it Over Here?
+Showcasing the top 5 highest COVID-19 cases by states.
+
+#### New York
+New York city has it the worst, but curve is being slowly flattened.
+
+![us](cases_us_states/New&#32;York.png)
+
+#### New Jersey
+
+![us](cases_us_states/New&#32;Jersey.png)
+
+#### Massachusetts
+
+![us](cases_us_states/Massachusetts.png)
+
+#### Illinois
+
+![us](cases_us_states/Illinois.png)
+
+#### California
+LA area is spreading more and more rapidly, as well as the Bay Area. Internships and jobs are being cancelled or remote for many of the big tech companies. Following the "coronavirus wave" concept, California may very well be the last state to recover fully from this epidemic.
+
+![us](cases_us_states/California.png)
 
 # COVID-19 Cases in the United States of America
 I used the dataset provided by the [NYTimes](https://github.com/nytimes/covid-19-data). Although the dataset provided by JHU CSSE provides international data, the NYTimes has more specific metadata that is useful in analyzing the United States data like coronavirus cases by states and cities. COVID-19 cases are rising dangerously high in United States at the time of writing this. The NYTimes has already displayed useful [statistics](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html) with their own database, but I decided to take it one step further and implement time factor.
-
-
-*Need to fix bugs related to gif compression*
-
-*A more cleaner `.mp4` video version is downloadable [here](geo/geo_us/us_cases_timelapse.mp4)*
