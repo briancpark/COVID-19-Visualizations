@@ -1,5 +1,5 @@
 # COVID-19-Visualizations
-Visualizations of the novel coronavirus using data science and machine learning techniques. Please feel free to contribute by sending issues or pull requests. I will do my best effort to update this daily. There is a lot of reading and writing of data involved, so the notebook tends to take around 10 minutes to completely run. At the time of making this project, I have never formally studied data science or machine learning yet, so feedback is appreciated. I was able to build this project through extensive documentation reading of the data science and machine learning packages, and I may be missing more efficient ways to run my code.
+Visualizations of the novel coronavirus using data science and machine learning techniques. Please feel free to contribute by sending issues or pull requests. I will do my best effort to update this daily. There is a lot of reading and writing of data involved, so the notebook tends to take around 30 minutes to completely run a fresh copy of the notebook. Apoligies in advanced if this causes your browser to crash because of high RAM usage (Runs okay on my machine with 8GB of RAM and in Chrome). At the time of making this project, I have never formally studied data science or machine learning yet, so feedback is much appreciated. I was able to build this project through extensive documentation reading of the data science and machine learning packages, and I may be missing more efficient ways to run my code.
 
 **If your intentions are to use this for a school project or personal project, please fork this repository and email [briancpark@berkeley.edu](mailto:briancpark@berkeley.edu). I am interested in what you are willing to create or have created with my code**
 
@@ -9,6 +9,9 @@ _Stay Strong, Stay Home, and Save Lives_
 
 ## Dependencies
 This project uses Pandas, NumPy, MatPlotLib, GeoPandas, and Descartes, plotly, and Selenium. All the code needed to run is in [`COVID19 Visualizations.ipynb`](https://github.com/briancpark/COVID-19-Visualizations/blob/master/COVID19%20Visualizations.ipynb). Please make sure you have installed the all the Python libraries before you run the code. Also make sure to install `ffmpeg` if you want to compile graphics into video.
+
+## Databases
+[NYTimes](https://github.com/nytimes/covid-19-data) database was used for United States of America data and [JHU CSSE](https://github.com/CSSEGISandData/COVID-19) database was used for international data. Repository is updated bidaily as both databases update around 12 hours apart.
 
 # Core Functions
 
