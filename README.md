@@ -40,7 +40,7 @@ South Korea's quick reponse and preparedness due to their previous experience wi
 ![korea](cases_country_active/Korea,&#32;South_active_cases.png)
 
 ### The Last of US
-Level of disorganized and opposing views of public health has caused economies to shut down during lockdowns and not take the virus to serious measures.
+Level of disorganized and opposing views of public health has caused economies to shut down during lockdowns and not take the virus to serious measures. *Note: I chose to max out confirmed cases by county to 1000 people and deaths to 100 people. I believe that 1000 people infected in a local county is alarming, and the same case for 100 people who died from COVID-19 in a county. I'm trying to point out the severity of the spread of COVID-19 rather than the number of cases, which a line graph does a much better job at*
 
 ![us](cases_country/US_all.png)
 ![us](cases_country_active/US_active_cases.png)
