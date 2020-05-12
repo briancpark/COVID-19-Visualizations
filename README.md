@@ -45,6 +45,9 @@ Level of disorganized and opposing views of public health has caused economies t
 ![us](cases_country/US_all.png)
 ![us](cases_country_active/US_active_cases.png)
 
+![COVID-19 Confirmed](timelapses/us_confirmed_timelapse.gif)
+![COVID-19 Deaths](timelapses/us_deaths_timelapse.gif)
+
 ### "The Coronavirus Wave"
 The novel coronavirus has spread westward and the US will probably be the latest to recover fully based on the data and statistics. Eastern Asia also have to take serious precautions for a second wave, which could lead to another "coronavirus wave" westwards.
 
