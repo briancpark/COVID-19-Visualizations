@@ -150,6 +150,18 @@ Uses `ffmpeg` to compile into video and gif format.
 ### COVID-19 Deaths by County in United States
 ![COVID-19 Deaths](timelapses/us_deaths_timelapse.gif)
 
+### US Citizens Who Always Wears Masks
+![always](geo/us_mask_usage/always.png)
+### US Citizens Who Always Wears Masks
+![frequently](geo/us_mask_usage/frequently.png)
+### US Citizens Who Always Wears Masks
+![sometimes](geo/us_mask_usage/sometimes.png)
+### US Citizens Who Always Wears Masks
+![rarely](geo/us_mask_usage/rarely.png)
+### US Citizens Who Always Wears Masks
+![never](geo/us_mask_usage/never.png)
+
+
 # Data Sources <a name="4"></a>
 I used the dataset provided by the [NYTimes](https://github.com/nytimes/covid-19-data). Although the dataset provided by JHU CSSE provides international data, the NYTimes has more specific metadata that is useful in analyzing the United States data like coronavirus cases by states and cities. COVID-19 cases are rising dangerously high in United States at the time of writing this. The NYTimes has already displayed useful [statistics](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html) with their own database, but I decided to take it one step further and implement time factor.
 
