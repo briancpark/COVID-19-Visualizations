@@ -1,0 +1,11 @@
+notebook
+jupyter
+pandas
+numpy
+matplotlib
+geopandas
+pycountry
+plotly
+selenium
+descartes
+webdriver_manager
