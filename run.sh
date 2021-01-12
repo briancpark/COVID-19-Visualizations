@@ -1,13 +1,21 @@
 #! /bin/bash
 
-RUNAT="06:00"
+RUNAT1="06:00"
+RUNAT2="18:00"
 
 while [ 1 ]
 do
     DATE=`/bin/date +%H:%M`
-    if [ $DATE. = $RUNAT. ]
+    if [ $DATE. = $RUNAT1. ]
     then
-        python3 main.py
+        git pull
+        ipython main.py
+    fi  
+    
+    if [ $DATE. = $RUNAT2. ]
+    then
+        git pull
+        ipython main.py
     fi
 
     sleep 3600
