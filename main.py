@@ -654,31 +654,31 @@ update_us_cases_by_counties(10000, 5)#len(dates)
 update_us_deaths_by_counties(1000, 5)
 
 
-# In[46]:
+# In[ ]:
 
 
 convert_to_png("confirmed", 5) #len(dates)) #10
 
 
-# In[47]:
+# In[ ]:
 
 
 convert_to_png("deaths", 5)
 
 
-# In[48]:
+# In[ ]:
 
 
 compile_timelapse()
 
 
-# In[49]:
+# In[ ]:
 
 
 ## print(px.colors.sequential.Inferno)
 
 
-# In[50]:
+# In[ ]:
 
 
 """#Debugging cell
@@ -715,7 +715,7 @@ fig.show()
 """
 
 
-# In[51]:
+# In[ ]:
 
 
 """
@@ -745,7 +745,7 @@ fig.show()
 """
 
 
-# In[52]:
+# In[ ]:
 
 
 """
@@ -787,7 +787,7 @@ fig.show()
 # # Machine Learning Methods
 # A start. Goal is to predict coronavirus cases before a lockdown has initiated, and then compare it to real data. I will learn how machine learning works someday
 
-# In[53]:
+# In[ ]:
 
 
 df = COVID19_US_states.loc[COVID19_US_states['state'] == 'New York'].drop(['fips'], axis=1)
@@ -805,7 +805,7 @@ lockdown_dates = df.index.to_list()[22:]
 df.head(22)
 
 
-# In[54]:
+# In[ ]:
 
 
 from scipy.optimize import curve_fit
@@ -819,14 +819,14 @@ popt, pcov = curve_fit(func, x, y, p0=(1, 1e-6, 1))
 popt
 
 
-# In[55]:
+# In[ ]:
 
 
 xx = np.array(range(len(nydates) + len(lockdown_dates)))
 yy = func(xx, *popt)
 
 
-# In[56]:
+# In[ ]:
 
 
 #plt.plot(x, y, 'ko')
@@ -836,7 +836,7 @@ plt.plot(df.index.to_list(), df['cases'].to_list())
 
 # # Drafts and Debugging For More Visualizations!
 
-# In[57]:
+# In[ ]:
 
 
 import plotly.express as px
@@ -851,7 +851,7 @@ df = df[df['date'] == '2020-04-01']
 df
 
 
-# In[58]:
+# In[ ]:
 
 
 from urllib.request import urlopen
@@ -870,16 +870,16 @@ fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
                            scope="usa",
                            labels={'cases':'cases'}
                           )
-fig.show()
+#fig.show()
 
 
-# In[59]:
+# In[ ]:
 
 
 counties
 
 
-# In[60]:
+# In[ ]:
 
 
 def retrieve_state_json(state):
@@ -890,7 +890,7 @@ def retrieve_state_json(state):
             custom["features"].remove(county)
 
 
-# In[61]:
+# In[ ]:
 
 
 custom = counties.copy()
@@ -900,13 +900,13 @@ for county in custom["features"]:
         custom["features"].remove(county)
 
 
-# In[62]:
+# In[ ]:
 
 
 custom
 
 
-# In[63]:
+# In[ ]:
 
 
 from urllib.request import urlopen
@@ -926,10 +926,10 @@ fig = px.choropleth(df, geojson=custom, locations='fips', color='cases',
                            labels={'cases':'cases'}
                           )
 fig.update_geos(fitbounds="locations")
-fig.show()
+#fig.show()
 
 
-# In[64]:
+# In[ ]:
 
 
 import plotly.express as px
@@ -943,16 +943,16 @@ fig = px.choropleth(df, geojson=custom, color="cases",
                    )
 fig.update_geos(fitbounds="locations", visible=True)
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-fig.show()
+#fig.show()
 
 
-# In[65]:
+# In[ ]:
 
 
 custom
 
 
-# In[66]:
+# In[ ]:
 
 
 custom['features'][0]
@@ -960,7 +960,7 @@ custom['features'][0]
 
 # # BREAK
 
-# In[67]:
+# In[ ]:
 
 
 #New dataframes
@@ -970,7 +970,7 @@ geo_deaths = COVID19_deaths.rename(index={'Korea, South': 'Korea, Republic of', 
 geo_recovered = COVID19_recovered.rename(index={'Korea, South': 'Korea, Republic of', 'US' :'United States', 'Taiwan*' :'Taiwan, Province of China', 'Vietnam':'Viet Nam', 'Russia': 'Russian Federation', 'Iran': 'Iran, Islamic Republic of', 'Tanzania': 'Tanzania, United Republic of', 'Laos': "Lao People's Democratic Republic", 'Syria': 'Syrian Arab Republic', 'Brunei': 'Brunei Darussalam', 'Venezuela': 'Venezuela, Bolivarian Republic of', 'Bolivia':  'Bolivia, Plurinational State of', 'Moldova': 'Moldova, Republic of'}).rename(index = lambda name: mapping.get(name))
 
 
-# In[68]:
+# In[ ]:
 
 
 """
@@ -992,26 +992,26 @@ fig.show()
 # # Mask Usage
 # Data was provided by the New York Times. Playing around with more data here.
 
-# In[69]:
+# In[ ]:
 
 
 #Load mask usage database
 US_masks = pd.read_csv("databases/nytimes/mask-use/mask-use-by-county.csv")
 
 
-# In[70]:
+# In[ ]:
 
 
 US_masks
 
 
-# In[71]:
+# In[ ]:
 
 
 US_masks['COUNTYFP'] = US_masks['COUNTYFP'].apply(lambda x: '{0:0>5}'.format(x))
 
 
-# In[72]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='ALWAYS',
@@ -1023,10 +1023,10 @@ fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='ALW
 
 fig.update_layout(title_text = 'US Citizens Who Always Wears Masks in Social Distancing             GitHub:briancpark')
 fig.write_html("geo/us_mask_usage_html/always.html")
-fig.show()
+#fig.show()
 
 
-# In[73]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='FREQUENTLY',
@@ -1038,10 +1038,10 @@ fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='FRE
 
 fig.update_layout(title_text = 'US Citizens Who Frequently Wears Masks in Social Distancing             GitHub:briancpark')
 fig.write_html("geo/us_mask_usage_html/frequently.html")
-fig.show()
+#fig.show()
 
 
-# In[74]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='SOMETIMES',
@@ -1053,10 +1053,10 @@ fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='SOM
 
 fig.update_layout(title_text = 'US Citizens Who Sometimes Wears Masks in Social Distancing             GitHub:briancpark')
 fig.write_html("geo/us_mask_usage_html/sometimes.html")
-fig.show()
+#fig.show()
 
 
-# In[75]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='RARELY',
@@ -1068,10 +1068,10 @@ fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='RAR
 
 fig.update_layout(title_text = 'US Citizens Who Rarely Wears Masks in Social Distancing             GitHub:briancpark')
 fig.write_html("geo/us_mask_usage_html/rarely.html")
-fig.show()
+#fig.show()
 
 
-# In[76]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='NEVER',
@@ -1083,10 +1083,10 @@ fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='NEV
 
 fig.update_layout(title_text = 'US Citizens Who Never Wears Masks in Social Distancing             GitHub:briancpark')
 fig.write_html("geo/us_mask_usage_html/never.html")
-fig.show()
+#fig.show()
 
 
-# In[77]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
@@ -1100,7 +1100,7 @@ driver.save_screenshot("geo/us_mask_usage/always.png")
 driver.close()
 
 
-# In[78]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
@@ -1114,7 +1114,7 @@ driver.save_screenshot("geo/us_mask_usage/sometimes.png")
 driver.close()
 
 
-# In[79]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
@@ -1128,7 +1128,7 @@ driver.save_screenshot("geo/us_mask_usage/frequently.png")
 driver.close()
 
 
-# In[80]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
@@ -1142,7 +1142,7 @@ driver.save_screenshot("geo/us_mask_usage/rarely.png")
 driver.close()
 
 
-# In[81]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
@@ -1156,7 +1156,7 @@ driver.save_screenshot("geo/us_mask_usage/never.png")
 driver.close()
 
 
-# In[82]:
+# In[ ]:
 
 
 import subprocess as cmd
@@ -1167,19 +1167,19 @@ from datetime import date
 cmd.run("git add .", check=True, shell=True)
 
 
-# In[83]:
+# In[ ]:
 
 
 cmd.run('git commit -m ' + '''"''' + str(date.today()) + ''' update"''', check=True, shell=True)
 
 
-# In[84]:
+# In[ ]:
 
 
 #os.system('git push')
 
 
-# In[85]:
+# In[ ]:
 
 
 get_ipython().system('git push')
