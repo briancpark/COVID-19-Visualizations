@@ -44,8 +44,8 @@ plotly.io.orca.config.save()
 
 
 #Please run this cell if databases directory is empty!
-#!git clone https://github.com/CSSEGISandData/COVID-19 databases/jhucsse
-#!git clone https://github.com/nytimes/covid-19-data databases/nytimes
+get_ipython().system('git clone https://github.com/CSSEGISandData/COVID-19 databases/jhucsse')
+get_ipython().system('git clone https://github.com/nytimes/covid-19-data databases/nytimes')
 
 
 # Run the cells below to get the most recent databases!
