@@ -9,3 +9,4 @@ plotly
 selenium
 descartes
 webdriver_manager
+scipy
