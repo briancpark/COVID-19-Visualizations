@@ -10,3 +10,5 @@ selenium
 descartes
 webdriver_manager
 scipy
+modin
+ray
