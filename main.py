@@ -11,7 +11,6 @@
 
 
 import pandas as pd
-#import modin.pandas as pd
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -45,8 +44,8 @@ plotly.io.orca.config.save()
 
 
 #Please run this cell if databases directory is empty!
-get_ipython().system('git clone https://github.com/CSSEGISandData/COVID-19 databases/jhucsse')
-get_ipython().system('git clone https://github.com/nytimes/covid-19-data databases/nytimes')
+#!git clone https://github.com/CSSEGISandData/COVID-19 databases/jhucsse
+#!git clone https://github.com/nytimes/covid-19-data databases/nytimes
 
 
 # Run the cells below to get the most recent databases!
@@ -522,7 +521,7 @@ for i in range(len(geo_confirmed.columns)):
 # # Visualizations with US Data
 # For some reason, plotly doesn't want to work when `write_image()` is called, so I used selenium instead to screenshot. Not a very convenient way, but in the end it gives high quality graphs.
 
-# In[38]:
+# In[51]:
 
 
 dates = list(set(list(COVID19_US_states['date'])))
@@ -530,7 +529,7 @@ dates.sort(key = lambda date: datetime.strptime(date, '%Y-%m-%d'))
 states = list(set(list(COVID19_US_states['state'])))
 
 
-# In[39]:
+# In[52]:
 
 
 def create_html(i, data_type, data_label, color_gradient, max_cases, date):
@@ -547,7 +546,7 @@ def create_html(i, data_type, data_label, color_gradient, max_cases, date):
     fig.write_html("geo/geo_us_" + data_type + "_html/" + str(i).zfill(3) + ".html")
 
 
-# In[40]:
+# In[53]:
 
 
 def update_us_cases_by_counties(max_cases, limit):
@@ -559,7 +558,7 @@ def update_us_cases_by_counties(max_cases, limit):
         i = i + 1
 
 
-# In[41]:
+# In[54]:
 
 
 def update_us_deaths_by_counties(max_cases, limit):
@@ -570,7 +569,7 @@ def update_us_deaths_by_counties(max_cases, limit):
         i = i + 1
 
 
-# In[42]:
+# In[55]:
 
 
 def convert_to_png(file, limit):
@@ -582,10 +581,10 @@ def convert_to_png(file, limit):
     for i in range(len(dates) - limit, len(dates)):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        options.add_argument('window-size=1920x1080');
+        options.add_argument('window-size=1280x720');
         
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        driver.get("file:///Users/brianpark/Projects/COVID19/geo/" + directory + "_html/" + str(i).zfill(3) + ".html")
+        driver.get("file:///Users/brianpark/Projects/COVID-19-Visualizations/geo/" + directory + "_html/" + str(i).zfill(3) + ".html")
         time.sleep(3)
         driver.save_screenshot("geo/" + directory + "/" + str(i).zfill(3) + ".png")
         driver.close()
@@ -594,7 +593,7 @@ def convert_to_png(file, limit):
 # ## Compile Timelapses
 # Create beautiful, and yet alarming dynamic graphs that implement time with COVID-19. `ffmpeg` is used to compile the `.gif` and `.mp4` files. Please make sure you have that installed. Can be simply done in your terminal via `pip install ffmpeg`
 
-# In[43]:
+# In[58]:
 
 
 def compile_timelapse():
@@ -643,43 +642,43 @@ def compile_timelapse():
     get_ipython().system('ffmpeg -i timelapses/us_deaths_timelapse.mp4 timelapses/us_deaths_timelapse.gif')
 
 
-# In[44]:
+# In[59]:
 
 
-update_us_cases_by_counties(10000, 5)#len(dates)
+update_us_cases_by_counties(10000, len(dates))#len(dates)
 
 
-# In[45]:
+# In[60]:
 
 
-update_us_deaths_by_counties(1000, 5)
+update_us_deaths_by_counties(1000, len(dates))
 
 
-# In[ ]:
+# In[61]:
 
 
-convert_to_png("confirmed", 5) #len(dates)) #10
+convert_to_png("confirmed", len(dates)) #len(dates)) #10
 
 
-# In[ ]:
+# In[62]:
 
 
-convert_to_png("deaths", 5)
+convert_to_png("deaths", len(dates))
 
 
-# In[ ]:
+# In[63]:
 
 
 compile_timelapse()
 
 
-# In[ ]:
+# In[64]:
 
 
 ## print(px.colors.sequential.Inferno)
 
 
-# In[ ]:
+# In[65]:
 
 
 """#Debugging cell
@@ -716,7 +715,7 @@ fig.show()
 """
 
 
-# In[ ]:
+# In[66]:
 
 
 """
@@ -746,7 +745,7 @@ fig.show()
 """
 
 
-# In[ ]:
+# In[67]:
 
 
 """
@@ -788,7 +787,7 @@ fig.show()
 # # Machine Learning Methods
 # A start. Goal is to predict coronavirus cases before a lockdown has initiated, and then compare it to real data. I will learn how machine learning works someday
 
-# In[ ]:
+# In[68]:
 
 
 df = COVID19_US_states.loc[COVID19_US_states['state'] == 'New York'].drop(['fips'], axis=1)
@@ -806,7 +805,7 @@ lockdown_dates = df.index.to_list()[22:]
 df.head(22)
 
 
-# In[ ]:
+# In[69]:
 
 
 from scipy.optimize import curve_fit
@@ -820,14 +819,14 @@ popt, pcov = curve_fit(func, x, y, p0=(1, 1e-6, 1))
 popt
 
 
-# In[ ]:
+# In[70]:
 
 
 xx = np.array(range(len(nydates) + len(lockdown_dates)))
 yy = func(xx, *popt)
 
 
-# In[ ]:
+# In[71]:
 
 
 #plt.plot(x, y, 'ko')
@@ -837,7 +836,7 @@ plt.plot(df.index.to_list(), df['cases'].to_list())
 
 # # Drafts and Debugging For More Visualizations!
 
-# In[ ]:
+# In[72]:
 
 
 import plotly.express as px
@@ -852,7 +851,7 @@ df = df[df['date'] == '2020-04-01']
 df
 
 
-# In[ ]:
+# In[73]:
 
 
 from urllib.request import urlopen
@@ -874,13 +873,13 @@ fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
 #fig.show()
 
 
-# In[ ]:
+# In[74]:
 
 
 counties
 
 
-# In[ ]:
+# In[75]:
 
 
 def retrieve_state_json(state):
@@ -891,7 +890,7 @@ def retrieve_state_json(state):
             custom["features"].remove(county)
 
 
-# In[ ]:
+# In[76]:
 
 
 custom = counties.copy()
@@ -901,13 +900,13 @@ for county in custom["features"]:
         custom["features"].remove(county)
 
 
-# In[ ]:
+# In[77]:
 
 
 custom
 
 
-# In[ ]:
+# In[78]:
 
 
 from urllib.request import urlopen
@@ -930,7 +929,7 @@ fig.update_geos(fitbounds="locations")
 #fig.show()
 
 
-# In[ ]:
+# In[79]:
 
 
 import plotly.express as px
@@ -947,13 +946,13 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #fig.show()
 
 
-# In[ ]:
+# In[80]:
 
 
 custom
 
 
-# In[ ]:
+# In[81]:
 
 
 custom['features'][0]
@@ -961,7 +960,7 @@ custom['features'][0]
 
 # # BREAK
 
-# In[ ]:
+# In[82]:
 
 
 #New dataframes
@@ -971,7 +970,7 @@ geo_deaths = COVID19_deaths.rename(index={'Korea, South': 'Korea, Republic of', 
 geo_recovered = COVID19_recovered.rename(index={'Korea, South': 'Korea, Republic of', 'US' :'United States', 'Taiwan*' :'Taiwan, Province of China', 'Vietnam':'Viet Nam', 'Russia': 'Russian Federation', 'Iran': 'Iran, Islamic Republic of', 'Tanzania': 'Tanzania, United Republic of', 'Laos': "Lao People's Democratic Republic", 'Syria': 'Syrian Arab Republic', 'Brunei': 'Brunei Darussalam', 'Venezuela': 'Venezuela, Bolivarian Republic of', 'Bolivia':  'Bolivia, Plurinational State of', 'Moldova': 'Moldova, Republic of'}).rename(index = lambda name: mapping.get(name))
 
 
-# In[ ]:
+# In[83]:
 
 
 """
@@ -993,26 +992,26 @@ fig.show()
 # # Mask Usage
 # Data was provided by the New York Times. Playing around with more data here.
 
-# In[ ]:
+# In[84]:
 
 
 #Load mask usage database
 US_masks = pd.read_csv("databases/nytimes/mask-use/mask-use-by-county.csv")
 
 
-# In[ ]:
+# In[85]:
 
 
 US_masks
 
 
-# In[ ]:
+# In[86]:
 
 
 US_masks['COUNTYFP'] = US_masks['COUNTYFP'].apply(lambda x: '{0:0>5}'.format(x))
 
 
-# In[ ]:
+# In[87]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='ALWAYS',
@@ -1027,7 +1026,7 @@ fig.write_html("geo/us_mask_usage_html/always.html")
 #fig.show()
 
 
-# In[ ]:
+# In[88]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='FREQUENTLY',
@@ -1042,7 +1041,7 @@ fig.write_html("geo/us_mask_usage_html/frequently.html")
 #fig.show()
 
 
-# In[ ]:
+# In[89]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='SOMETIMES',
@@ -1057,7 +1056,7 @@ fig.write_html("geo/us_mask_usage_html/sometimes.html")
 #fig.show()
 
 
-# In[ ]:
+# In[90]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='RARELY',
@@ -1072,7 +1071,7 @@ fig.write_html("geo/us_mask_usage_html/rarely.html")
 #fig.show()
 
 
-# In[ ]:
+# In[91]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='NEVER',
@@ -1087,7 +1086,7 @@ fig.write_html("geo/us_mask_usage_html/never.html")
 #fig.show()
 
 
-# In[ ]:
+# In[92]:
 
 
 options = webdriver.ChromeOptions()
@@ -1095,13 +1094,13 @@ options.add_argument('headless')
 options.add_argument('window-size=1920x1080');
 
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver.get("file:///Users/brianpark/Desktop/PUBLISHED%20Projects/COVID19/geo/us_mask_usage_html/always.html")
+driver.get("file:///Users/brianpark/Projects/COVID-19-Visualizations/geo/us_mask_usage_html/always.html")
 time.sleep(3)
 driver.save_screenshot("geo/us_mask_usage/always.png")
 driver.close()
 
 
-# In[ ]:
+# In[93]:
 
 
 options = webdriver.ChromeOptions()
@@ -1109,13 +1108,13 @@ options.add_argument('headless')
 options.add_argument('window-size=1920x1080');
 
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver.get("file:///Users/brianpark/Desktop/PUBLISHED%20Projects/COVID19/geo/us_mask_usage_html/sometimes.html")
+driver.get("file:///Users/brianpark/Projects/COVID-19-Visualizations/geo/us_mask_usage_html/sometimes.html")
 time.sleep(3)
 driver.save_screenshot("geo/us_mask_usage/sometimes.png")
 driver.close()
 
 
-# In[ ]:
+# In[94]:
 
 
 options = webdriver.ChromeOptions()
@@ -1123,7 +1122,7 @@ options.add_argument('headless')
 options.add_argument('window-size=1920x1080');
 
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver.get("file:///Users/brianpark/Desktop/PUBLISHED%20Projects/COVID19/geo/us_mask_usage_html/frequently.html")
+driver.get("file:///Users/brianpark/Projects/COVID-19-Visualizations/geo/us_mask_usage_html/frequently.html")
 time.sleep(3)
 driver.save_screenshot("geo/us_mask_usage/frequently.png")
 driver.close()
@@ -1137,7 +1136,7 @@ options.add_argument('headless')
 options.add_argument('window-size=1920x1080');
 
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver.get("file:///Users/brianpark/Desktop/PUBLISHED%20Projects/COVID19/geo/us_mask_usage_html/rarely.html")
+driver.get("file:///Users/brianpark/Projects/COVID-19-Visualizations/geo/us_mask_usage_html/rarely.html")
 time.sleep(3)
 driver.save_screenshot("geo/us_mask_usage/rarely.png")
 driver.close()
@@ -1151,7 +1150,7 @@ options.add_argument('headless')
 options.add_argument('window-size=1920x1080');
 
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver.get("file:///Users/brianpark/Desktop/PUBLISHED%20Projects/COVID19/geo/us_mask_usage_html/never.html")
+driver.get("file:///Users/brianpark/Projects/COVID-19-Visualizations/geo/us_mask_usage_html/never.html")
 time.sleep(3)
 driver.save_screenshot("geo/us_mask_usage/never.png")
 driver.close()
