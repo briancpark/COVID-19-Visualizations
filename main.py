@@ -7,7 +7,7 @@
 # 
 # If you are planning to run the notebook on your own computer, please make sure you have all the dependencies installed! 
 
-# In[1]:
+# In[ ]:
 
 
 import pandas as pd
@@ -40,24 +40,24 @@ plotly.io.orca.config.save()
 # ## Pulling the Databases
 # For cloning the repository that contain the databases, I used `.gitignore` to prevent pushing large files to this repository. I do not modify the directories that contain the databases and I leave them as is.
 
-# In[2]:
+# In[ ]:
 
 
 #Please run this cell if databases directory is empty!
-#!git clone https://github.com/CSSEGISandData/COVID-19 databases/jhucsse
-#!git clone https://github.com/nytimes/covid-19-data databases/nytimes
+get_ipython().system('git clone https://github.com/CSSEGISandData/COVID-19 databases/jhucsse')
+get_ipython().system('git clone https://github.com/nytimes/covid-19-data databases/nytimes')
 
 
 # Run the cells below to get the most recent databases!
 
-# In[3]:
+# In[ ]:
 
 
 get_ipython().system('git -C databases/jhucsse pull origin master')
 get_ipython().system('ls databases/jhucsse')
 
 
-# In[4]:
+# In[ ]:
 
 
 get_ipython().system('git -C databases/nytimes pull origin master')
@@ -67,7 +67,7 @@ get_ipython().system('ls databases/nytimes')
 # ## Load `.csv` Files into Pandas DataFrames
 # All the recent databases are pulled from GitHub
 
-# In[5]:
+# In[ ]:
 
 
 COVID19_confirmed = pd.read_csv("databases/jhucsse/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
@@ -88,7 +88,7 @@ dates.remove('Lat')
 dates.remove('Long')
 
 
-# In[6]:
+# In[ ]:
 
 
 COVID19_US = pd.read_csv("databases/nytimes/us.csv") #Already provided with the JHU CSSE
@@ -103,7 +103,7 @@ states = list(set(COVID19_US_states['state'].tolist()))
 # ## Data Cleaning
 # Cleaning unnecessary data.
 
-# In[7]:
+# In[ ]:
 
 
 def data_clean(data):
@@ -113,7 +113,7 @@ def data_clean(data):
     return data
 
 
-# In[8]:
+# In[ ]:
 
 
 COVID19_confirmed = data_clean(COVID19_confirmed)
@@ -125,7 +125,7 @@ dataset = [(COVID19_confirmed, "confirmed"), (COVID19_deaths, "deaths"), (COVID1
 # ## Data Charts with Worldwide Data
 # Functions to compile graphs
 
-# In[9]:
+# In[ ]:
 
 
 def cases_country(country_name, data, label=None):
@@ -146,7 +146,7 @@ def cases_country(country_name, data, label=None):
     return country_plot
 
 
-# In[10]:
+# In[ ]:
 
 
 def update_all_cases_country_individual():
@@ -158,7 +158,7 @@ def update_all_cases_country_individual():
             plt.clf()
 
 
-# In[11]:
+# In[ ]:
 
 
 def all_cases_country(country_name):
@@ -173,7 +173,7 @@ def all_cases_country(country_name):
     return plt
 
 
-# In[12]:
+# In[ ]:
 
 
 def update_all_cases_country():
@@ -184,7 +184,7 @@ def update_all_cases_country():
         plt.clf()
 
 
-# In[13]:
+# In[ ]:
 
 
 def worldwide_cases():
@@ -201,7 +201,7 @@ def worldwide_cases():
     return world
 
 
-# In[14]:
+# In[ ]:
 
 
 def cases_country_active(country_name):
@@ -220,7 +220,7 @@ def cases_country_active(country_name):
     active.set_title("Active COVID-19 Cases in " + country_name)
 
 
-# In[15]:
+# In[ ]:
 
 
 def update_all_cases_country_active():    
@@ -231,7 +231,7 @@ def update_all_cases_country_active():
         plt.clf()
 
 
-# In[16]:
+# In[ ]:
 
 
 def worldwide_active():
@@ -251,7 +251,7 @@ def worldwide_active():
     return active
 
 
-# In[17]:
+# In[ ]:
 
 
 #Still testing and experimenting
@@ -272,31 +272,31 @@ def compare_countries(list_countries):
 compare_countries(['US'])
 
 
-# In[18]:
+# In[ ]:
 
 
 update_all_cases_country_individual()
 
 
-# In[19]:
+# In[ ]:
 
 
 update_all_cases_country()
 
 
-# In[20]:
+# In[ ]:
 
 
 worldwide_cases()
 
 
-# In[21]:
+# In[ ]:
 
 
 update_all_cases_country_active()
 
 
-# In[22]:
+# In[ ]:
 
 
 worldwide_active()
@@ -305,7 +305,7 @@ worldwide_active()
 # ## Data with US Data
 # Functions that chart US data, from the NYTimes database.
 
-# In[23]:
+# In[ ]:
 
 
 def cases_by_state(state):
@@ -319,7 +319,7 @@ def cases_by_state(state):
     return df.plot()
 
 
-# In[24]:
+# In[ ]:
 
 
 def update_states():
@@ -334,7 +334,7 @@ def update_states():
         plt.clf
 
 
-# In[25]:
+# In[ ]:
 
 
 cases_by_state('Washington')
@@ -343,13 +343,13 @@ update_states()
 
 # # Visualizations with Global Data
 
-# In[26]:
+# In[ ]:
 
 
 world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 
 
-# In[27]:
+# In[ ]:
 
 
 COVID19_geo_confirmed = dataset[0][0]
@@ -379,7 +379,7 @@ world_recovered = world.merge(COVID19_geo_recovered, how = 'inner', on = 'name')
 world_recovered = world_recovered[(world_recovered.pop_est>0) & (world_recovered.name!="Antarctica")]
 
 
-# In[28]:
+# In[ ]:
 
 
 dates = list(COVID19_geo_confirmed)
@@ -387,7 +387,7 @@ dates.remove('name')
 dates.sort()
 
 
-# In[29]:
+# In[ ]:
 
 
 def geo_confirmed_corona(data):    
@@ -408,7 +408,7 @@ def geo_confirmed_corona(data):
         plt.close(fig)
 
 
-# In[30]:
+# In[ ]:
 
 
 def geo_deaths_corona(data):
@@ -428,7 +428,7 @@ def geo_deaths_corona(data):
         plt.close(fig)
 
 
-# In[31]:
+# In[ ]:
 
 
 def geo_recovered_corona(data):
@@ -448,7 +448,7 @@ def geo_recovered_corona(data):
         plt.close(fig)
 
 
-# In[32]:
+# In[ ]:
 
 
 geo_confirmed_corona(COVID19_geo_confirmed)
@@ -456,14 +456,14 @@ geo_deaths_corona(COVID19_geo_deaths)
 geo_recovered_corona(COVID19_geo_recovered)
 
 
-# In[33]:
+# In[ ]:
 
 
 #New color theme to display color gradients
 Solarcorona = ['rgb(252, 222, 156)', 'rgb(250, 164, 118)', 'rgb(240, 116, 110)', 'rgb(227, 79, 111)', 'rgb(220, 57, 119)', 'rgb(185, 37, 122)', 'rgb(124, 29, 111)', '#1b0c41', '#000004']
 
 
-# In[34]:
+# In[ ]:
 
 
 #SCRAP PREVIOUS
@@ -474,7 +474,7 @@ geo_deaths = COVID19_deaths.rename(index={'Korea, South': 'Korea, Republic of', 
 geo_recovered = COVID19_recovered.rename(index={'Korea, South': 'Korea, Republic of', 'US' :'United States', 'Taiwan*' :'Taiwan, Province of China', 'Vietnam':'Viet Nam', 'Russia': 'Russian Federation', 'Iran': 'Iran, Islamic Republic of', 'Tanzania': 'Tanzania, United Republic of', 'Laos': "Lao People's Democratic Republic", 'Syria': 'Syrian Arab Republic', 'Brunei': 'Brunei Darussalam', 'Venezuela': 'Venezuela, Bolivarian Republic of', 'Bolivia':  'Bolivia, Plurinational State of', 'Moldova': 'Moldova, Republic of'}).rename(index = lambda name: mapping.get(name))
 
 
-# In[35]:
+# In[ ]:
 
 
 #confirmed 500000
@@ -499,7 +499,7 @@ def geo_frames(df, file, case_range):
 #geo_frames(geo_confirmed, "geo_confirmed", 200000)
 
 
-# In[36]:
+# In[ ]:
 
 
 """
@@ -512,7 +512,7 @@ for i in range(len(geo_confirmed.columns)):
 """
 
 
-# In[37]:
+# In[ ]:
 
 
 #len(geo_confirmed.columns)
@@ -521,7 +521,7 @@ for i in range(len(geo_confirmed.columns)):
 # # Visualizations with US Data
 # For some reason, plotly doesn't want to work when `write_image()` is called, so I used selenium instead to screenshot. Not a very convenient way, but in the end it gives high quality graphs.
 
-# In[51]:
+# In[ ]:
 
 
 dates = list(set(list(COVID19_US_states['date'])))
@@ -529,7 +529,7 @@ dates.sort(key = lambda date: datetime.strptime(date, '%Y-%m-%d'))
 states = list(set(list(COVID19_US_states['state'])))
 
 
-# In[52]:
+# In[ ]:
 
 
 def create_html(i, data_type, data_label, color_gradient, max_cases, date):
@@ -546,7 +546,7 @@ def create_html(i, data_type, data_label, color_gradient, max_cases, date):
     fig.write_html("geo/geo_us_" + data_type + "_html/" + str(i).zfill(3) + ".html")
 
 
-# In[53]:
+# In[ ]:
 
 
 def update_us_cases_by_counties(max_cases, limit):
@@ -558,7 +558,7 @@ def update_us_cases_by_counties(max_cases, limit):
         i = i + 1
 
 
-# In[54]:
+# In[ ]:
 
 
 def update_us_deaths_by_counties(max_cases, limit):
@@ -569,7 +569,7 @@ def update_us_deaths_by_counties(max_cases, limit):
         i = i + 1
 
 
-# In[55]:
+# In[ ]:
 
 
 def convert_to_png(file, limit):
@@ -593,7 +593,7 @@ def convert_to_png(file, limit):
 # ## Compile Timelapses
 # Create beautiful, and yet alarming dynamic graphs that implement time with COVID-19. `ffmpeg` is used to compile the `.gif` and `.mp4` files. Please make sure you have that installed. Can be simply done in your terminal via `pip install ffmpeg`
 
-# In[58]:
+# In[ ]:
 
 
 def compile_timelapse():
@@ -642,43 +642,43 @@ def compile_timelapse():
     get_ipython().system('ffmpeg -i timelapses/us_deaths_timelapse.mp4 timelapses/us_deaths_timelapse.gif')
 
 
-# In[59]:
+# In[ ]:
 
 
-update_us_cases_by_counties(10000, len(dates))#len(dates)
+update_us_cases_by_counties(10000, 5)#len(dates)
 
 
-# In[60]:
+# In[ ]:
 
 
-update_us_deaths_by_counties(1000, len(dates))
+update_us_deaths_by_counties(1000, 5)
 
 
-# In[61]:
+# In[ ]:
 
 
-convert_to_png("confirmed", len(dates)) #len(dates)) #10
+convert_to_png("confirmed", 5) #len(dates)) #10
 
 
-# In[62]:
+# In[ ]:
 
 
-convert_to_png("deaths", len(dates))
+convert_to_png("deaths", 5)
 
 
-# In[63]:
+# In[ ]:
 
 
 compile_timelapse()
 
 
-# In[64]:
+# In[ ]:
 
 
 ## print(px.colors.sequential.Inferno)
 
 
-# In[65]:
+# In[ ]:
 
 
 """#Debugging cell
@@ -715,7 +715,7 @@ fig.show()
 """
 
 
-# In[66]:
+# In[ ]:
 
 
 """
@@ -745,7 +745,7 @@ fig.show()
 """
 
 
-# In[67]:
+# In[ ]:
 
 
 """
@@ -787,7 +787,7 @@ fig.show()
 # # Machine Learning Methods
 # A start. Goal is to predict coronavirus cases before a lockdown has initiated, and then compare it to real data. I will learn how machine learning works someday
 
-# In[68]:
+# In[ ]:
 
 
 df = COVID19_US_states.loc[COVID19_US_states['state'] == 'New York'].drop(['fips'], axis=1)
@@ -805,7 +805,7 @@ lockdown_dates = df.index.to_list()[22:]
 df.head(22)
 
 
-# In[69]:
+# In[ ]:
 
 
 from scipy.optimize import curve_fit
@@ -819,14 +819,14 @@ popt, pcov = curve_fit(func, x, y, p0=(1, 1e-6, 1))
 popt
 
 
-# In[70]:
+# In[ ]:
 
 
 xx = np.array(range(len(nydates) + len(lockdown_dates)))
 yy = func(xx, *popt)
 
 
-# In[71]:
+# In[ ]:
 
 
 #plt.plot(x, y, 'ko')
@@ -836,7 +836,7 @@ plt.plot(df.index.to_list(), df['cases'].to_list())
 
 # # Drafts and Debugging For More Visualizations!
 
-# In[72]:
+# In[ ]:
 
 
 import plotly.express as px
@@ -851,7 +851,7 @@ df = df[df['date'] == '2020-04-01']
 df
 
 
-# In[73]:
+# In[ ]:
 
 
 from urllib.request import urlopen
@@ -873,13 +873,13 @@ fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
 #fig.show()
 
 
-# In[74]:
+# In[ ]:
 
 
 counties
 
 
-# In[75]:
+# In[ ]:
 
 
 def retrieve_state_json(state):
@@ -890,7 +890,7 @@ def retrieve_state_json(state):
             custom["features"].remove(county)
 
 
-# In[76]:
+# In[ ]:
 
 
 custom = counties.copy()
@@ -900,13 +900,13 @@ for county in custom["features"]:
         custom["features"].remove(county)
 
 
-# In[77]:
+# In[ ]:
 
 
 custom
 
 
-# In[78]:
+# In[ ]:
 
 
 from urllib.request import urlopen
@@ -929,7 +929,7 @@ fig.update_geos(fitbounds="locations")
 #fig.show()
 
 
-# In[79]:
+# In[ ]:
 
 
 import plotly.express as px
@@ -946,13 +946,13 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #fig.show()
 
 
-# In[80]:
+# In[ ]:
 
 
 custom
 
 
-# In[81]:
+# In[ ]:
 
 
 custom['features'][0]
@@ -960,7 +960,7 @@ custom['features'][0]
 
 # # BREAK
 
-# In[82]:
+# In[ ]:
 
 
 #New dataframes
@@ -970,7 +970,7 @@ geo_deaths = COVID19_deaths.rename(index={'Korea, South': 'Korea, Republic of', 
 geo_recovered = COVID19_recovered.rename(index={'Korea, South': 'Korea, Republic of', 'US' :'United States', 'Taiwan*' :'Taiwan, Province of China', 'Vietnam':'Viet Nam', 'Russia': 'Russian Federation', 'Iran': 'Iran, Islamic Republic of', 'Tanzania': 'Tanzania, United Republic of', 'Laos': "Lao People's Democratic Republic", 'Syria': 'Syrian Arab Republic', 'Brunei': 'Brunei Darussalam', 'Venezuela': 'Venezuela, Bolivarian Republic of', 'Bolivia':  'Bolivia, Plurinational State of', 'Moldova': 'Moldova, Republic of'}).rename(index = lambda name: mapping.get(name))
 
 
-# In[83]:
+# In[ ]:
 
 
 """
@@ -992,26 +992,26 @@ fig.show()
 # # Mask Usage
 # Data was provided by the New York Times. Playing around with more data here.
 
-# In[84]:
+# In[ ]:
 
 
 #Load mask usage database
 US_masks = pd.read_csv("databases/nytimes/mask-use/mask-use-by-county.csv")
 
 
-# In[85]:
+# In[ ]:
 
 
 US_masks
 
 
-# In[86]:
+# In[ ]:
 
 
 US_masks['COUNTYFP'] = US_masks['COUNTYFP'].apply(lambda x: '{0:0>5}'.format(x))
 
 
-# In[87]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='ALWAYS',
@@ -1026,7 +1026,7 @@ fig.write_html("geo/us_mask_usage_html/always.html")
 #fig.show()
 
 
-# In[88]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='FREQUENTLY',
@@ -1041,7 +1041,7 @@ fig.write_html("geo/us_mask_usage_html/frequently.html")
 #fig.show()
 
 
-# In[89]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='SOMETIMES',
@@ -1056,7 +1056,7 @@ fig.write_html("geo/us_mask_usage_html/sometimes.html")
 #fig.show()
 
 
-# In[90]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='RARELY',
@@ -1071,7 +1071,7 @@ fig.write_html("geo/us_mask_usage_html/rarely.html")
 #fig.show()
 
 
-# In[91]:
+# In[ ]:
 
 
 fig = px.choropleth(US_masks, geojson=counties, locations='COUNTYFP', color='NEVER',
@@ -1086,7 +1086,7 @@ fig.write_html("geo/us_mask_usage_html/never.html")
 #fig.show()
 
 
-# In[92]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
@@ -1100,7 +1100,7 @@ driver.save_screenshot("geo/us_mask_usage/always.png")
 driver.close()
 
 
-# In[93]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
@@ -1114,7 +1114,7 @@ driver.save_screenshot("geo/us_mask_usage/sometimes.png")
 driver.close()
 
 
-# In[94]:
+# In[ ]:
 
 
 options = webdriver.ChromeOptions()
